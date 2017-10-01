@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.newlyfly.crm.domain">
+
+    <class name="Customer" table="customer" schema="crm">
+        <id name="custId" column="cust_id">
+            <generator class="identity"/>
+        </id>
+        <property name="custName" column="cust_name"/>
+        <property name="custUserId" column="cust_user_id"/>
+        <property name="custCreateId" column="cust_create_id"/>
+        <property name="custSource" column="cust_source"/>
+        <property name="custIndustry" column="cust_industry"/>
+        <property name="custLevel" column="cust_level"/>
+        <!--<property name="custLinkman" column="cust_linkman"/>-->
+        <set name="custLinkman" table="link_man" lazy="true">
+            <key column="cust_id"></key>
+            <one-to-many class="LinkMan"/>
+        </set>
+        <property name="custPhone" column="cust_phone"/>
+        <property name="custMobile" column="cust_mobile"/>
+        <property name="custZipcode" column="cust_zipcode"/>
+        <property name="custAddress" column="cust_address"/>
+        <property name="custCreatetime" column="cust_createtime"/>
+        <property name="custFax" column="cust_fax"/>
+        <property name="custWebsite" column="cust_website"/>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <constant name="struts.devMode" value="true"/>
+    <constant name="struts.i18n.encoding" value="UTF-8"/>
+    <!--2.3版本中，当使用通配符方式时，将动态方式取消，否则可能起冲突-->
+    <constant name="struts.enable.DynamicMethodInvocation" value="false"/>
+
+    <package name="crm" namespace="/" extends="struts-default">
+        <!--配置拦截器-->
+        <interceptors>
+            <!--登录拦截器-->
+            <interceptor name="loginInterceptor" class="com.newlyfly.crm.interceptor.LoginInterceptor"/>
+            <interceptor-stack name="loginStack">
+                <interceptor-ref name="loginInterceptor">
+                    <!--登录方法不拦截，其他方法都拦截-->
+                    <param name="excludeMethods">login</param>
+                </interceptor-ref>
+                <!--引用默认的拦截器栈20个-->
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+        </interceptors>
+        <!--默认启用拦截器栈-->
+        <default-interceptor-ref name="loginStack"/>
+        <!--全局配置返回结果-->
+        <global-results>
+            <result name="toLogin" type="redirect">/login.jsp</result>
+        </global-results>
+
+        <!--客户action-->
+        <action name="customerAction_*" class="com.newlyfly.crm.action.CustomerAction" method="{1}">
+            <result name="success">/WEB-INF/jsp/customer/list.jsp</result>
+            <result name="toAdd">/WEB-INF/jsp/customer/add.jsp</result>
+            <result name="toUpdate">/WEB-INF/jsp/customer/edit.jsp</result>
+            <result name="add" type="redirect">/customerAction_list.action</result>
+            <result name="delete" type="redirect">/customerAction_list.action</result>
+            <result name="update" type="redirect">/customerAction_list.action</result>
+        </action>
+
+        <!--用户action-->
+        <action name="loginAction_*" class="com.newlyfly.crm.action.LoginAction" method="{1}">
+            <!--<result name="success" type="redirect">/customerAction_list.action</result>-->
+            <result name="success" type="redirect">/index.htm</result>
+            <result name="error">/login.jsp</result>
+            <!--<result name="toAdd">/WEB-INF/jsp/customer/add.jsp</result>-->
+            <!--<result name="toUpdate">/WEB-INF/jsp/customer/edit.jsp</result>-->
+            <!--<result name="add" type="redirect">/customerAction_list.action</result>-->
+            <!--<result name="delete" type="redirect">/customerAction_list.action</result>-->
+            <!--<result name="update" type="redirect">/customerAction_list.action</result>-->
+
+        </action>
+    </package>
+
+</struts>
