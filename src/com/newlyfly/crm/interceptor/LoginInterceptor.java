@@ -16,7 +16,7 @@ public class LoginInterceptor extends MethodFilterInterceptor {
         // 获得session域中的User对象
         User user = (User) ActionContext.getContext().getSession().get("user");
         // 判断user是否存在
-        if (null == user || "".equals(user)){
+        if (null == user || "".equals(user.toString())){
             // 不存在跳转到登录页面
             return "toLogin";
         } else {

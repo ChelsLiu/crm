@@ -60,6 +60,14 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public User queryUserByUserName(String userName) {
+        Query query = HibernateUtil.getCurrentSession().createQuery("from User where userName = ?");
+        query.setParameter(0, userName);
+        User user = (User) query.uniqueResult();
+        return user;
+    }
+
+    @Override
     public List<User> queryPage(Integer start,Integer end) {
         Query query = HibernateUtil.getCurrentSession().createQuery(" from User ");
         //设置分页limit

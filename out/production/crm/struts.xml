@@ -51,7 +51,6 @@
             <!--<result name="add" type="redirect">/customerAction_list.action</result>-->
             <!--<result name="delete" type="redirect">/customerAction_list.action</result>-->
             <!--<result name="update" type="redirect">/customerAction_list.action</result>-->
-
         </action>
     </package>
 

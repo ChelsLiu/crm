@@ -28,6 +28,9 @@ public interface UserDao {
     // 根据用户名和密码查询单条用户
     User queryUserByUserNameAndPassword(String userName, String password);
 
+    // 根据用户名查询单条用户
+    User queryUserByUserName(String userName);
+
     // 使用query分页查询
     List<User> queryPage(Integer start, Integer end);
 

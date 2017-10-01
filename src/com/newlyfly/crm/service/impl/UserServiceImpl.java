@@ -99,6 +99,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User queryUserByUserName(String userName) {
+        Session session = HibernateUtil.getCurrentSession();
+        //开启事务
+        Transaction tx = session.beginTransaction();
+        User user = null;
+        try {
+            user = userDao.queryUserByUserName(userName);
+        } catch (Exception e) {
+            e.printStackTrace();
+            tx.rollback();
+        }
+        tx.commit();
+        return user;
+    }
+
+    @Override
     public List<User> queryPage(Integer start,Integer end) {
         Session session = HibernateUtil.getCurrentSession();
         //开启事务
