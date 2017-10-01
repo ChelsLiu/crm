@@ -51,9 +51,10 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User queryUserByUserName(String userName) {
-        Query query = HibernateUtil.getCurrentSession().createQuery("from User where userName = ?");
-        query.setParameter(0,userName);
+    public User queryUserByUserNameAndPassword(String userName, String password) {
+        Query query = HibernateUtil.getCurrentSession().createQuery("from User where userName = ? and password = ?");
+        query.setParameter(0, userName);
+        query.setParameter(1, password);
         User user = (User) query.uniqueResult();
         return user;
     }

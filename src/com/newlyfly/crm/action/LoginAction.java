@@ -24,7 +24,8 @@ public class LoginAction extends ActionSupport implements ModelDriven<User>{
 
     public String login() throws Exception {
         //根据登录信息
-        User user = userService.queryUserByUserName(model.getUserName());
+        User user = userService.queryUserByUserNameAndPassword(model.getUserName(), model.getPassword());
+
         if (!StringUtils.isNotBlank(model.getUserName())){
             msg = "用户名不能为空！";
         }else if (null == user){

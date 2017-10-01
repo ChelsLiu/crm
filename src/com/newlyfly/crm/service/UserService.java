@@ -22,8 +22,8 @@ public interface UserService {
 
     User queryUserById(Long id);
 
-    //  根据用户名查询单条用户
-    User queryUserByUserName(String userName);
+    // 根据用户名和密码查询用户
+    User queryUserByUserNameAndPassword(String userName, String password);
 
     List<User> queryPage(Integer start, Integer end);
 }
